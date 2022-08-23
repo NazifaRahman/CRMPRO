@@ -18,12 +18,12 @@ public class LoginPage extends TestBase{
     private WebElement password;
     @FindBy(css = "input[value = 'Login']")
     private WebElement logInButton;
-    @FindBy(xpath = "//img[contains(@class, 'img-responsive')")
+    @FindBy(xpath = "//img[@class= 'img-responsive']")
     private WebElement crmLogo;
 
     //Initialize page objects
     public LoginPage() {
-        PageFactory.initElements(TestBase.getDrive(), this);
+        PageFactory.initElements(driver, this);
         //return PageFactory.initElements(TestBase.getDrive(), HomePage.class);
     }
 
@@ -39,7 +39,8 @@ public class LoginPage extends TestBase{
         password.sendKeys(pass);
         logInButton.click();
 
-        return PageFactory.initElements(TestBase.getDrive(), HomePage.class);
+        //return PageFactory.initElements(driver, HomePage.class);
+        return new HomePage();
 
     }
 }

@@ -19,18 +19,19 @@ public class LoginPageTest extends TestBase {
         super();
     }
 
-    @Test
+    @BeforeMethod
     public void setUp() {
 //        startLoginPage()
 //                .logIn(TestBase.getPropertyValue("username"), TestBase.getPropertyValue("password"));
         initialization();
         loginPage = new LoginPage();
+       // homePage = new HomePage();
     }
 
     @Test(priority=1)
     public void loginPageTitleTest() {
         String title = loginPage.validateLoginPageTitle();
-        Assert.assertEquals(title, "CRMPRO  - CRM software for customer relationship management, sales, and support.");
+        Assert.assertEquals(title, "CRMPRO - CRM software for customer relationship management, sales, and support.");
 
     }
     @Test(priority=2)
@@ -41,11 +42,11 @@ public class LoginPageTest extends TestBase {
     @Test(priority=3)
     public void loginTest() {
         //loginPage.logIn(properties.getProperty("username"), properties.getProperty("password")); orr
-        homePage = loginPage.logIn(TestBase.getPropertyValue("username"), TestBase.getPropertyValue("password"));
+        homePage = loginPage.logIn(properties.getProperty("username"), properties.getProperty("password"));
     }
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        //driver.quit();
     }
 }

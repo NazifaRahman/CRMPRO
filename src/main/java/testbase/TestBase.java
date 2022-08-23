@@ -18,31 +18,31 @@ import java.util.Properties;
 public class TestBase {
 
     public static WebDriver driver; //public: to use in on other classes
-    //public static Properties properties;
+    public static Properties properties;
 
-    public static String getPropertyValue(String propertyName) {
-    //public testbase.TestBase() { //constructor
-        String propertyValue="";
+    //public static String getPropertyValue(String propertyName) {
+    public TestBase() { //constructor
+        //String propertyValue="";
 
         try {
 
             InputStream inputStream = new FileInputStream("src/main/resources/info.properties"); //to know where to read this file
-            Properties properties = new Properties();
+            //Properties properties = new Properties();
             properties = new Properties();
             properties.load(inputStream);
-            propertyValue = properties.getProperty(propertyName);
+           // propertyValue = properties.getProperty(propertyName);
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return propertyValue;
+       // return propertyValue;
     }
 
 
     public static void initialization() {
-        String BrowserName = getPropertyValue("browser");
+        String BrowserName = properties.getProperty("browser");
 
         if(BrowserName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
@@ -55,17 +55,15 @@ public class TestBase {
 
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(getPropertyValue("implicitWait"))));
-        driver.get(getPropertyValue("url"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(properties.getProperty("implicitWait"))));
+        driver.get(properties.getProperty("url"));
     }
 
-    public static WebDriver getDrive() {
-        return driver;
-    }
 
-    public LoginPage startLoginPage() {
-        return PageFactory.initElements(driver, LoginPage.class);
-    }
+
+//    public LoginPage startLoginPage() {
+//        return PageFactory.initElements(driver, LoginPage.class);
+//    }
 
 
 }
